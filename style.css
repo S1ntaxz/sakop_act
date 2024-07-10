@@ -22,19 +22,20 @@ form {
     margin-bottom: 20px;
 }
 
-input[type="text"], button, select {
+input[type="text"], button, select, .btn-home {
     padding: 10px;
     font-size: 1rem;
 }
 
-button {
+button, .btn-home {
     cursor: pointer;
     background-color: #4CAF50;
     color: white;
     border: none;
+    text-decoration: none; /* To remove underline on anchor tag */
 }
 
-button:hover {
+button:hover, .btn-home:hover {
     opacity: 0.8;
 }
 
