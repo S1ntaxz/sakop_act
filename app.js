@@ -1,4 +1,4 @@
-const apiKey = '1'; // Replace with your actual API key
+const apiKey = '1'; 
 const apiUrl = `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
 
 // Function to initialize the application
@@ -46,6 +46,9 @@ function init() {
             });
         })
         .catch(error => console.error('Error fetching categories:', error));
+
+    // Display all meals on page load
+    getMeals('');
 }
 
 // Function to fetch meals by query
@@ -180,7 +183,41 @@ function addToFavorites(mealId) {
 // Function to display favorites
 function displayFavorites() {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    displayMeals(favorites);
+    const container = document.getElementById('meals-container');
+    container.innerHTML = '';
+
+    if (favorites.length > 0) {
+        favorites.forEach(meal => {
+            const mealDiv = createFavoriteMealDiv(meal);
+            container.appendChild(mealDiv);
+        });
+    } else {
+        container.innerHTML = '<p>No favorite meals added yet.</p>';
+    }
+}
+
+// Function to create a favorite meal card with delete button
+function createFavoriteMealDiv(meal) {
+    const mealDiv = document.createElement('div');
+    mealDiv.className = 'meal';
+    mealDiv.innerHTML = `
+        <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+        <h2>${meal.strMeal}</h2>
+        <button class="btn-view-details" data-meal-id="${meal.idMeal}">View Details</button>
+        <button class="btn-delete-from-favorites" data-meal-id="${meal.idMeal}">Delete from Favorites</button>
+    `;
+
+    // Event listener for View Details button
+    mealDiv.querySelector('.btn-view-details').addEventListener('click', function() {
+        displayMealDetails(meal.idMeal);
+    });
+
+    // Event listener for Delete from Favorites button
+    mealDiv.querySelector('.btn-delete-from-favorites').addEventListener('click', function() {
+        deleteFromFavorites(meal.idMeal);
+    });
+
+    return mealDiv;
 }
 
 // Function to delete meal from favorites
