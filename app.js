@@ -8,6 +8,9 @@ function init() {
     const categorySelect = document.getElementById('category-select');
     const ingredientSearchBtn = document.getElementById('ingredient-search-btn');
     const viewFavoritesBtn = document.getElementById('view-favorites-btn');
+    const mealDetailsModal = document.getElementById('meal-details-modal');
+    const modalContent = document.querySelector('.modal-content');
+    const closeBtn = document.getElementsByClassName('close')[0];
 
     // Event listeners
     searchForm.addEventListener('submit', function(event) {
@@ -33,6 +36,18 @@ function init() {
     });
 
     viewFavoritesBtn.addEventListener('click', displayFavorites);
+
+    // Close modal event
+    closeBtn.addEventListener('click', function() {
+        mealDetailsModal.style.display = 'none';
+    });
+
+    // Click outside modal content to close modal
+    window.addEventListener('click', function(event) {
+        if (event.target === mealDetailsModal) {
+            mealDetailsModal.style.display = 'none';
+        }
+    });
 
     // Fetch categories and populate select options
     fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
@@ -124,10 +139,10 @@ function displayMealDetails(mealId) {
         .then(response => response.json())
         .then(data => {
             const meal = data.meals[0];
-            const container = document.getElementById('meals-container');
-            container.innerHTML = `
-                <div class="meal-detail">
-                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+            const mealDetailsContainer = document.getElementById('meal-details');
+            mealDetailsContainer.innerHTML = `
+                <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                <div class="meal-info">
                     <h2>${meal.strMeal}</h2>
                     <h3>Ingredients</h3>
                     <ul>
@@ -139,8 +154,13 @@ function displayMealDetails(mealId) {
                 </div>
             `;
 
+            // Show modal
+            const mealDetailsModal = document.getElementById('meal-details-modal');
+            mealDetailsModal.style.display = 'block';
+
             // Event listener for Back button
-            container.querySelector('#btn-back').addEventListener('click', function() {
+            mealDetailsContainer.querySelector('#btn-back').addEventListener('click', function() {
+                mealDetailsModal.style.display = 'none';
                 const query = document.getElementById('query-input').value;
                 getMeals(query);
             });

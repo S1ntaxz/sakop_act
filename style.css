@@ -3,35 +3,48 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text */
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: #4CAF50; /* Green header */
+    color: #fff; /* White text */
     padding: 20px;
     text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem; /* Larger heading */
 }
 
 form {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 input[type="text"], button, select {
-    padding: 10px;
+    padding: 12px; /* Slightly larger padding */
     font-size: 1rem;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+}
+
+input[type="text"], select {
+    width: 250px; /* Fixed width for input and select */
 }
 
 button {
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #4B5734; /* Soft blue-gray button */
     color: white;
     border: none;
+    border-radius: 5px;
 }
 
 button:hover {
@@ -42,9 +55,14 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    margin-top: 10px;
 }
 
+.buttons button {
+    margin: 0 5px;
+}
+
+/* Meal Container */
 .meal-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -54,9 +72,10 @@ button:hover {
 
 .meal {
     background-color: #fff;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    border-radius: 5px;
 }
 
 .meal:hover {
@@ -67,44 +86,98 @@ button:hover {
     width: 100%;
     height: auto;
     border-radius: 5px;
+    object-fit: cover; /* Ensures the image covers the container without stretching */
 }
 
 .meal h2 {
     margin-top: 10px;
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* Slightly larger heading */
     text-align: center;
 }
 
 .meal .btn-view-details, .meal .btn-add-to-favorites, .meal .btn-delete-from-favorites {
     display: block;
     width: 100%;
-    padding: 8px 0;
+    padding: 12px 0; /* Slightly larger padding */
     margin-top: 10px;
-    background-color: #4CAF50;
+    background-color: #4B5734; /* Soft blue-gray button */
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    text-align: center;
 }
 
 .meal .btn-view-details:hover, .meal .btn-add-to-favorites:hover, .meal .btn-delete-from-favorites:hover {
     opacity: 0.8;
 }
 
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Semi-transparent dark overlay */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Light modal background */
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #ccc; /* Light gray border */
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #333; /* Darken close button on hover */
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .meal-detail {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
 }
 
 .meal-detail img {
-    width: 100%;
-    height: auto;
+    max-width: 100%; /* Ensures the image doesn't exceed the modal width */
+    max-height: calc(80vh - 120px); /* Limits image height to 80% of viewport height minus modal padding */
+    width: auto; /* Ensures image width adjusts according to its container */
+    height: auto; /* Ensures image height adjusts according to its container */
     border-radius: 5px;
+    object-fit: contain; /* Keeps the aspect ratio and fits the image within the container */
+    margin-bottom: 20px;
 }
 
 .meal-detail h2 {
     margin-top: 10px;
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Larger heading */
     text-align: center;
 }
 
@@ -119,16 +192,21 @@ button:hover {
 }
 
 .meal-detail ul li {
-    margin-top: 5px;
-}
-
-#query-input, #ingredient-input {
-    width: 200px;
+    margin-top: 8px; /* Slightly more spacing between list items */
 }
 
 @media (max-width: 768px) {
     .meal-container {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .meal-detail {
+        padding: 20px;
+    }
+
+    .modal-content {
+        width: 90%; /* Adjusted width for smaller screens */
+        max-width: 90%;
     }
 }
 
