@@ -16,16 +16,38 @@
         <div class="buttons">
             <button id="random-meal-btn">Get Random Meal</button>
             <select id="category-select">
-                <option value="">Select C</option>
+                <option value="">Select Category</option>
             </select>
             <input type="text" id="ingredient-input" placeholder="Enter an ingredient">
             <button id="ingredient-search-btn">Search by Ingredient</button>
             <button id="view-favorites-btn">View Favorites</button>
+            <a href="index.html" class="btn-home">Home</a>
         </div>
     </header>
     <main>
         <div id="meals-container" class="meal-container"></div>
     </main>
+
+    <!-- Modal for Meal Details -->
+    <div id="meal-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="meal-details" class="meal-detail-horizontal">
+                <div class="meal-image-container">
+                    <img id="meal-image" src="" alt="">
+                </div>
+                <div class="meal-info">
+                    <h2 id="meal-title"></h2>
+                    <h3>Ingredients</h3>
+                    <ul id="meal-ingredients"></ul>
+                    <h3>Instructions</h3>
+                    <p id="meal-instructions"></p>
+                    <button id="btn-back">Back to Meals</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
