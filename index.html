@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Recipe Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Meal Recipe Finder</h1>
+        <form id="search-form">
+            <input type="text" id="query-input" placeholder="Enter meal name or ingredient" required>
+            <button type="submit">Search</button>
+        </form>
+        <div class="buttons">
+            <button id="random-meal-btn">Get Random Meal</button>
+            <select id="category-select">
+                <option value="">Select Category</option>
+            </select>
+            <input type="text" id="ingredient-input" placeholder="Enter an ingredient">
+            <button id="ingredient-search-btn">Search by Ingredient</button>
+            <button id="view-favorites-btn">View Favorites</button>
+        </div>
+    </header>
+    <main>
+        <div id="meals-container" class="meal-container"></div>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
