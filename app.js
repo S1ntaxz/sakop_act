@@ -46,6 +46,9 @@ function init() {
             });
         })
         .catch(error => console.error('Error fetching categories:', error));
+
+    // Display all meals on page load
+    getMeals('');
 }
 
 // Function to fetch meals by query
@@ -124,10 +127,10 @@ function displayMealDetails(mealId) {
         .then(response => response.json())
         .then(data => {
             const meal = data.meals[0];
-            const container = document.getElementById('meals-container');
-            container.innerHTML = `
-                <div class="meal-detail">
-                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+            const mealDetailsContainer = document.getElementById('meal-details');
+            mealDetailsContainer.innerHTML = `
+                <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                <div class="meal-info">
                     <h2>${meal.strMeal}</h2>
                     <h3>Ingredients</h3>
                     <ul>
@@ -139,8 +142,13 @@ function displayMealDetails(mealId) {
                 </div>
             `;
 
+            // Show modal
+            const mealDetailsModal = document.getElementById('meal-details-modal');
+            mealDetailsModal.style.display = 'block';
+
             // Event listener for Back button
-            container.querySelector('#btn-back').addEventListener('click', function() {
+            mealDetailsContainer.querySelector('#btn-back').addEventListener('click', function() {
+                mealDetailsModal.style.display = 'none';
                 const query = document.getElementById('query-input').value;
                 getMeals(query);
             });
@@ -180,7 +188,41 @@ function addToFavorites(mealId) {
 // Function to display favorites
 function displayFavorites() {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    displayMeals(favorites);
+    const container = document.getElementById('meals-container');
+    container.innerHTML = '';
+
+    if (favorites.length > 0) {
+        favorites.forEach(meal => {
+            const mealDiv = createFavoriteMealDiv(meal);
+            container.appendChild(mealDiv);
+        });
+    } else {
+        container.innerHTML = '<p>No favorite meals added yet.</p>';
+    }
+}
+
+// Function to create a favorite meal card with delete button
+function createFavoriteMealDiv(meal) {
+    const mealDiv = document.createElement('div');
+    mealDiv.className = 'meal';
+    mealDiv.innerHTML = `
+        <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+        <h2>${meal.strMeal}</h2>
+        <button class="btn-view-details" data-meal-id="${meal.idMeal}">View Details</button>
+        <button class="btn-delete-from-favorites" data-meal-id="${meal.idMeal}">Delete from Favorites</button>
+    `;
+
+    // Event listener for View Details button
+    mealDiv.querySelector('.btn-view-details').addEventListener('click', function() {
+        displayMealDetails(meal.idMeal);
+    });
+
+    // Event listener for Delete from Favorites button
+    mealDiv.querySelector('.btn-delete-from-favorites').addEventListener('click', function() {
+        deleteFromFavorites(meal.idMeal);
+    });
+
+    return mealDiv;
 }
 
 // Function to delete meal from favorites
