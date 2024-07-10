@@ -1,0 +1,139 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"], button, select {
+    padding: 10px;
+    font-size: 1rem;
+}
+
+button {
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.meal-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.meal {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.meal:hover {
+    transform: translateY(-5px);
+}
+
+.meal img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.meal h2 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.meal .btn-view-details, .meal .btn-add-to-favorites, .meal .btn-delete-from-favorites {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.meal .btn-view-details:hover, .meal .btn-add-to-favorites:hover, .meal .btn-delete-from-favorites:hover {
+    opacity: 0.8;
+}
+
+.meal-detail {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.meal-detail img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.meal-detail h2 {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.meal-detail h3 {
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.meal-detail ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.meal-detail ul li {
+    margin-top: 5px;
+}
+
+#query-input, #ingredient-input {
+    width: 200px;
+}
+
+@media (max-width: 768px) {
+    .meal-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .meal-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
